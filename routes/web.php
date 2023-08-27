@@ -6,7 +6,16 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 
 // Home Page
-Route::get('/', [HomeController::class, 'index']);
+
+//Route::get('/', [HomeController::class, 'index']);
+Route::get('/', function () {
+    return view('layouts/app');
+});
+Route::get('/home', function () {
+    return view('home');
+});
+
+
 
 // Transactions
 Route::get('/transactions', [TransactionController::class, 'index']);
