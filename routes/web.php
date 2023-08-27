@@ -7,7 +7,6 @@ Auth::routes();
 
 // All other routes should lead to your React application
 Route::get('/{any}', function () {
-    return view('react'); // Assuming 'react' is the name of your react.blade.php file
+    return view('layout.app'); // Assuming 'app' is the name of your app.blade.php file
 })->where('any', '.*');
-
 

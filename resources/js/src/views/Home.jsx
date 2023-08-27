@@ -1,36 +1,42 @@
-import React from 'react';
-
+import React, { useState } from "react";
+import LoginForm from "../components/Login";
+import RegistrationForm from "../components/Registration";
 const Home = () => {
-  return (
-    <div className="min-h-screen" >
-      <header className="bg-blue-600 py-4">
-        <div className="container mx-auto text-white text-center">
-          <h1 className="text-3xl font-semibold">Personal Financial Tracker</h1>
-          <p className="mt-2">Track your expenses and manage your finances.</p>
-        </div>
-      </header>
+    const [registration, setRegistration] = useState(false);
 
-      <div className="container mx-auto py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Add your finance summary cards here */}
-          <div className="bg-red-200     p-6 rounded shadow-md">
-            <h2 className="text-lg font-semibold mb-4">Total Income</h2>
-            <p className="text-2xl">$5,000</p>
-          </div>
-          <div className="bg-white p-6 rounded shadow-md">
-            <h2 className="text-lg font-semibold mb-4">Total Expenses</h2>
-            <p className="text-2xl">$3,000</p>
-          </div>
-          <div className="bg-white p-6 rounded shadow-md">
-            <h2 className="text-lg font-semibold mb-4">Net Balance</h2>
-            <p className="text-2xl">$2,000</p>
-          </div>
-        </div>
+    const toggleRegistration = () => {
+        setRegistration(!registration);
+    };
 
-        {/* Add additional sections and components here */}
-      </div>
-    </div>
-  );
+    return (
+        <div className="min-h-screen ">
+            <header className="bg-gray-800 py-4">
+            <div className="mb-4">
+                <img className="mx-auto h-12 w-auto" src="/fin-logo.png" alt="Workflow"/>
+            </div>
+                <div className="mx-auto text-white text-center">
+                    <h1 className="text-3xl font-semibold text-yellow-300">
+                        Personal Financial Tracker
+                    </h1>
+                    <p className="mt-2">
+                        Track your expenses and manage your finances.
+                    </p>
+                </div>
+            </header>
+            <div className="container mx-auto py-8">
+                <div className="mt-8 w-full">
+                    <h2 className="text-xl font-semibold mb-4 text-center">
+                        {registration ? "Register" : "Login"}
+                    </h2>
+                    <div className="w-full flex flex-col justify-center items-center">
+                        {!registration &&  <LoginForm registration={registration} toggleRegistration={toggleRegistration}/>}
+                        {registration && <RegistrationForm registration={registration} toggleRegistration={toggleRegistration}/>}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default Home;
