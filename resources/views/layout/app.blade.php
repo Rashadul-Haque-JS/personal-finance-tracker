@@ -17,7 +17,7 @@
     <div id="app">
         @if(request()->path() !== '/')
         <header class="bg-white p-4 shadow-md">
-            <!-- Your header content here -->
+            <!-- Header content here -->
             <nav>
                 <ul>
                     <li><a href="/">Home</a></li>
@@ -35,7 +35,7 @@
         </main>
         
         <footer class="bg-gray-200 p-4 text-center">
-            <!-- Your footer content here -->
+            <!-- Footer content here -->
             &copy; {{ date('Y') }} Your App Name
         </footer>
     </div>
