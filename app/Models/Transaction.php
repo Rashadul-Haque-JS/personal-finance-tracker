@@ -1,24 +1,28 @@
 <?php
 
-// app\Models\Transaction.php
-
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
-    // ... other attributes and methods ...
-    
-    // Define the transaction's user relationship
+    use HasFactory;
+
+    protected $fillable = [
+        'amount', 'description', 'user_id', 'category_id',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    
-    // Define the transaction's category relationship
+
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
+
+    // Other methods, attributes, and relationships...
 }
+
