@@ -15,6 +15,10 @@ export const createUser = (userData) => {
   return axiosInstance.post('/users', userData);
 };
 
+export const login = (userData) => {
+  return axiosInstance.post('/login', userData);
+};
+
 // Transaction API
 export const createTransaction = (transactionData) => {
   return axiosInstance.post('/transactions', transactionData);
@@ -28,6 +32,7 @@ export const createCategory = (categoryData) => {
 // Export an object with the functions
 const api = {
   createUser,
+  login,
   createTransaction,
   createCategory
 };

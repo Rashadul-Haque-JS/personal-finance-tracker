@@ -3,22 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User; // Don't forget to import your User model
+use App\Models\User; 
 
 class UserController extends Controller
 {
-    public function index()
+    public function users()
     {
         // Retrieve and return a list of users
         $users = User::all();
         return response()->json($users);
     }
 
-    public function create()
-    {
-        // Show a form for creating a new user (if applicable)
-    }
-
+   
     public function store(Request $request)
     {
         // Store the new user based on the request data
@@ -34,11 +30,7 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-    public function edit(string $id)
-    {
-        // Show a form for editing a specific user (if applicable)
-    }
-
+  
     public function update(Request $request, string $id)
     {
         // Update a specific user based on the request data

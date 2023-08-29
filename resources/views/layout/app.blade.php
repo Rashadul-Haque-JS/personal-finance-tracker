@@ -12,23 +12,35 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script defer>
+    function logout() {
+        localStorage.removeItem("user");
+        window.location.href = "/";
+    }
+</script>
 </head>
 <body>
     <div id="app">
         @if(request()->path() !== '/')
-        <header class="bg-white p-4 shadow-md">
-            <!-- Header content here -->
-            <nav>
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/transactions">Transactions</a></li>
-                    <li><a href="/categories">Categories</a></li>
-                    <!-- Add more navigation links here -->
-                </ul>
-            </nav>
-        </header>
+    <header class="bg-gray-800 py-4 relative">
+    <div class="bg-gray-800 py-4">
+        <div class="bg-black w-full h-2 m-0 absolute left-0 top-0"></div>
+        <div class="mb-3 mt-1">
+            <img class="mx-auto h-12 w-auto" src="/fin-logo.png" alt="Workflow"/>
+        </div>
+        <nav class="mx-auto text-yellow-300 text-center text-md">
+            <ul class="flex items-center justify-center gap-4 sm:gap-3 xs:gap-3">
+                <li><a href="/dashboard" class="cursor-pointer">Dashboard</a></li>
+                <li><a href="/transaction" class="cursor-pointer">Transactions</a></li>
+                <li><a href="/category" class="cursor-pointer">Categories</a></li>
+                <li onclick="logout()" class="text-blue-500 cursor-pointer">
+                     Logout
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
         @endif
-
         <main class="mx-auto">
             <!-- React root element -->
             <div id="root"></div>

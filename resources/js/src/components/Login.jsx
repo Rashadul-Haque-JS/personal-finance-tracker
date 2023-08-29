@@ -1,12 +1,15 @@
 
 import React, {useState}from "react";
-
+import {useNavigate} from "react-router-dom";
+import api from "../api";
 const LoginForm = ({ registration, toggleRegistration}) => {
 
     const [formData, setFormData] = useState({
         email: "",
         password: "",
     });
+
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -18,10 +21,17 @@ const LoginForm = ({ registration, toggleRegistration}) => {
 
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
-       // const response = await api.(formData);
+        const response = await api.login(formData);
+        if (response.status === 200) {
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+            navigate('/dashboard');
+            window.location.reload();
+        }
         console.log(response);
-        setEmail('');
-        setPassword('');
+       setFormData({
+        email: "",
+        password: "",
+    })
     }
 
     return (

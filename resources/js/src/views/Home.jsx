@@ -10,8 +10,9 @@ const Home = () => {
 
     return (
         <div className="min-h-screen ">
-            <header className="bg-gray-800 py-4">
-            <div className="mb-4">
+            <header className="bg-gray-800 py-4 relative">
+                <div className="bg-black w-full h-2 p-0 m-0 absolute left-0 top-0"></div>
+            <div className="mb-3 mt-1">
                 <img className="mx-auto h-12 w-auto" src="/fin-logo.png" alt="Workflow"/>
             </div>
                 <div className="mx-auto text-white text-center">

@@ -7,33 +7,25 @@ use App\Models\Transaction;
 
 class TransactionController extends Controller
 {
-    public function index()
-    {
-        $transactions = Transaction::all();
-        return view('transactions.index', ['transactions' => $transactions]);
-    }
-
-    public function create()
-    {
-        return view('transactions.create');
-    }
-
+    
     public function store(Request $request)
     {
         // Validate the input
         $validatedData = $request->validate([
             'amount' => 'required|numeric',
-            // Other validation rules
+            
         ]);
 
-        // Create a new transaction
-        Transaction::create([
+       Transaction::create([
             'amount' => $validatedData['amount'],
+            'description' => $request->input('description'),
+            'user_id' => $request->input('user_id'),
+            'category_id' =>$request->input('category_id'),
             // Other attributes
         ]);
 
         return redirect('/transactions')->with('success', 'Transaction created successfully.');
     }
 
-    // Implement update and delete methods
+  
 }
