@@ -24,7 +24,7 @@ Route::put('/users/{id}', [UserController::class, 'update']);
 Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
 // Categories
-Route::get('/categories/{id}', [CategoryController::class, 'show']);
+Route::get('/categories', [CategoryController::class, 'categories']);
 Route::post('/categories', [CategoryController::class, 'store']);
 Route::put('/categories/{id}', [CategoryController::class, 'update']);
 Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://127.0.0.1:8000/api'; // Replace with your API base URL
+const API_BASE_URL = 'http://127.0.0.1:8000/api'; 
 
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
@@ -23,8 +23,14 @@ export const login = (userData) => {
 export const createTransaction = (transactionData) => {
   return axiosInstance.post('/transactions', transactionData);
 };
+export const getTransactions = (id) => {
+  return axiosInstance.get(`/transactions/${id}`);
+};
 
 // Category API
+export const getCategories = () => {
+  return axiosInstance.get('/categories');
+};
 export const createCategory = (categoryData) => {
   return axiosInstance.post('/categories', categoryData);
 };
@@ -34,7 +40,9 @@ const api = {
   createUser,
   login,
   createTransaction,
-  createCategory
+  createCategory,
+  getCategories,
+  getTransactions
 };
 
 export default api;

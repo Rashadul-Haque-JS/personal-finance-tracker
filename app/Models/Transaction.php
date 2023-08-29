@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,7 +9,7 @@ class Transaction extends Model
     use HasFactory;
 
     protected $fillable = [
-        'amount', 'description', 'user_id', 'category_id',
+        'amount', 'description', 'user_id', 'category_id', 'transaction_type',
     ];
 
     public function user()
@@ -25,4 +24,3 @@ class Transaction extends Model
 
     // Other methods, attributes, and relationships...
 }
-

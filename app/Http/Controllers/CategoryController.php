@@ -7,10 +7,10 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function categories()
     {
         $categories = Category::all();
-        return view('categories.index', ['categories' => $categories]);
+        return response()->json(['categories' => $categories]);
     }
 
     public function create()
