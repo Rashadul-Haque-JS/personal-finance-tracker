@@ -7,7 +7,7 @@ const RegistrationForm = ({ toggleRegistration}) => {
         password: "",
         confirmPassword: ""
     });
-
+    const [message, setMessage] = useState("");
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
@@ -18,12 +18,20 @@ const RegistrationForm = ({ toggleRegistration}) => {
 
     const handleRegiSubmit = async (e) => {
         e.preventDefault();
+
+        if(formData.password !== formData.confirmPassword) {
+            setMessage("Passwords do not match");
+            return;
+        }
         const response = await api.createUser(formData);
         console.log(response);
-        setName('');
-        setEmail('');
-        setPassword('');
-        setConfirmPassword('');
+        setFormData({
+            name: "",
+            email: "",
+            password: "",
+            confirmPassword: ""
+        })
+        setMessage("")
     }
     return (
         <form className="w-full max-w-sm px-4" onSubmit={handleRegiSubmit}>
@@ -41,6 +49,7 @@ const RegistrationForm = ({ toggleRegistration}) => {
                     name="name"
                     placeholder="Name"
                     onChange={handleChange}
+                    required
                 />
             </div>
             <div className="mb-4">
@@ -57,6 +66,7 @@ const RegistrationForm = ({ toggleRegistration}) => {
                     name="email"
                     placeholder="Email"
                     onChange={handleChange}
+                    required
                 />
             </div>
             <div className="mb-4">
@@ -73,24 +83,31 @@ const RegistrationForm = ({ toggleRegistration}) => {
                     name="password"
                     placeholder="Password"
                     onChange={handleChange}
+                    required
                 />
             </div>
             <div className="mb-4">
                 <label
                     className="block text-gray-700 text-sm font-bold mb-2"
-                    htmlFor="password_confirmation"
+                    htmlFor="confirmPassword"
                 >
                     Confirm Password
                 </label>
                 <input
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="password_confirmation"
+                    id="confirmPassword"
                     type="password"
-                    name="password_confirmation"
-                    placeholder="Confirm Password"
+                    name="confirmPassword"
+                    placeholder="confirmPassword"
                     onChange={handleChange}
+                    required
                 />
             </div>
+            {message && (
+                <div className="mb-4">
+                    <p className="text-red-500 text-xs italic">{message}</p>
+                </div>
+            )}
             <div className="flex items-center justify-between">
                 <button
                     className="bg-gray-800 hover:bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

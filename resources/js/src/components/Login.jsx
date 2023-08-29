@@ -1,38 +1,45 @@
-
-import React, {useState}from "react";
-import {useNavigate} from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../api";
-const LoginForm = ({ registration, toggleRegistration}) => {
-
+const LoginForm = ({ registration, toggleRegistration }) => {
     const [formData, setFormData] = useState({
         email: "",
         password: "",
     });
 
     const navigate = useNavigate();
+    const [message, setMessage] = useState("");
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
-            [name]: value
+            [name]: value,
         }));
     };
 
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
-        const response = await api.login(formData);
-        if (response.status === 200) {
-            localStorage.setItem('user', JSON.stringify(response.data.user));
-            navigate('/dashboard');
-            window.location.reload();
+
+        try {
+            const response = await api.login(formData);
+            if (response.status === 200) {
+                localStorage.setItem(
+                    "user",
+                    JSON.stringify(response.data.user)
+                );
+                navigate("/dashboard");
+                window.location.reload();
+                setFormData({
+                    email: "",
+                    password: "",
+                });
+                setMessage("");
+            }
+        } catch (error) {
+            setMessage("Error! Please check your credentials!");
         }
-        console.log(response);
-       setFormData({
-        email: "",
-        password: "",
-    })
-    }
+    };
 
     return (
         <form className="w-full max-w-sm px-4" onSubmit={handleLoginSubmit}>
@@ -68,6 +75,11 @@ const LoginForm = ({ registration, toggleRegistration}) => {
                     onChange={handleChange}
                 />
             </div>
+            {message && (
+                <div className="mb-4">
+                    <p className="text-red-500 text-xs italic">{message}</p>
+                </div>
+            )}
             <div className="flex items-center justify-between">
                 <button
                     className="bg-gray-800 hover:bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
